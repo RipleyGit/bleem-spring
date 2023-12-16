@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import site.bleem.boot.demo.config.AccessLimit;
 
 /**
  * @author yubs
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class DemoController {
+    @AccessLimit(message="参数已处理过")
     @GetMapping("/hello/{word}")
     public ResponseEntity<String> returnWorld(@PathVariable("word") String word) {
         return ResponseEntity.ok("hello "+word);
