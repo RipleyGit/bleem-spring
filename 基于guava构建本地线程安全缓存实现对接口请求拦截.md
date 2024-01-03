@@ -104,12 +104,11 @@ public @interface AccessLimit {
 ```
 2. 拦截AOP实现类：针对AccessLimit注解的接口在方法执行前，进行拦截，对请求参数进行MD5加密，放入本地缓存中，若缓存中存在该MD5值，则说明该请求已经处理过，将注解中的描述封装成异常进行抛出提示。
 ```
-@Slf4j
 @Aspect
 @Configuration
 public class AccessLimitAop {
 
-    @Pointcut("@annotation(site.bleem.boot.web.common.AccessLimit)")
+    @Pointcut("@annotation(site.bleem.boot.demo.config.AccessLimit)")
     public void limitAccess() {}
 
     @Before("limitAccess() && @annotation(accessLimit)")
@@ -117,7 +116,11 @@ public class AccessLimitAop {
         int maxCount = accessLimit.maxCount();
         String message = accessLimit.message();
         Object[] args = joinPoin.getArgs();
-        String string = args.toString();
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < args.length; i++) {
+            builder.append(args[i]);
+        }
+        String string = builder.toString();
         string = string.trim();
         String md5Hash = StringUtils.getMD5Hash(string);
         ILocalCache instance = LocalCacheManager.getInstance();

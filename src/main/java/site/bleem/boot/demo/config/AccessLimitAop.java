@@ -12,8 +12,6 @@ import site.bleem.boot.demo.util.StringUtils;
 
 /**
  * @author yubs
- * @desc todo
- * @date 2023/12/1
  */
 @Aspect
 @Configuration
