@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import site.bleem.boot.demo.config.AccessLimit;
+import site.bleem.boot.demo.exception.BusinessException;
 
 /**
  * @author yubs
  * @desc demo
- * @date 2023/12/15
  */
 @RestController
 public class DemoController {
@@ -17,5 +17,8 @@ public class DemoController {
     @GetMapping("/hello/{word}")
     public ResponseEntity<String> returnWorld(@PathVariable("word") String word) {
         return ResponseEntity.ok("hello "+word);
+    }    @GetMapping("/exception")
+    public ResponseEntity<String> exceptionMsg() {
+        throw new BusinessException("这里抛出一个异常");
     }
 }

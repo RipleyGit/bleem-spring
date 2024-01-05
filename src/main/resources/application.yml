@@ -4,3 +4,11 @@ server:
 spring:
   application:
     name: bleem-demo
+  cache:
+    type: caffeine
+
+
+spjr001:
+  enabled: true
+  url: https://ksjc.jsemsc.cn:8010/spjr001
+  company: 320117000001
